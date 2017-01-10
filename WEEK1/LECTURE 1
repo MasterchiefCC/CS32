@@ -5,9 +5,11 @@ using namespace std;
 class circle {
 public:
 	circle(double x, double y, double r);
-	void scale(double factor);
+	bool scale(double factor);
 	void draw();
+	double GetRadius();
 private:
+	//invariant m_r>0
 	double m_x;
 	double m_y;
 	double m_r;
@@ -21,6 +23,36 @@ int main() {
 	c.scale(2);
 	c.draw();
 	cout << area(c);
+	double sf;
+	cin >> sf;
+	if (!c.scale(sf)) {
+		//deal with the problems
+	}
+}
+
+circle::circle(double x, double y, double r) {
+	if (r <= 0) {
+		cout << "Cannot create a circle with negative radius";
+		exit(1);
+	}
+	m_x = x;
+	m_y = y;
+	m_r = r;
+}
+
+bool circle::scale(double factor) {
+	if (factor <= 0)
+		return false;
+	m_r *= factor;
+	return true;
+}
+
+double circle::GetRadius(){
+	return m_r;
+}
+
+double area(circle x) {
+	return 3.1415926*x.GetRadius()*x.GetRadius();
 }
 
 /*
