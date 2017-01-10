@@ -1,1 +1,36 @@
+#include <iostream>
 
+using namespace std;
+
+class circle {
+public:
+	circle(double x, double y, double r);
+	void scale(double factor);
+	void draw();
+private:
+	double m_x;
+	double m_y;
+	double m_r;
+};
+
+double area(circle a);
+
+
+int main() {
+	circle c(-2, 5, 10);
+	c.scale(2);
+	c.draw();
+	cout << area(c);
+}
+
+/*
+source file
+↓
+compiler
+↓
+object file eg. pictures.obj|| picture.o
+↓
+linker
+↓
+executable windows:xxx.exe||unix:a.out
+*/
