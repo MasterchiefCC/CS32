@@ -59,14 +59,7 @@ void Rat::move()
 	if (attemptMove(*m_arena, randInt(0, NUMDIRS - 1), m_row, m_col))
 	{
 		if (m_arena->getCellStatus(m_row, m_col) == HAS_POISON)
-		{
-			m_arena->setCellStatus(m_row, m_col, EMPTY);
-			if (m_health == 2) {
-				History*h = m_arena->history();
-				h->record(m_row, m_col);
-			}
 			m_health--;
-		}
 	}
 
 	if (m_health < INITIAL_RAT_HEALTH)

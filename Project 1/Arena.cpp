@@ -180,9 +180,15 @@ void Arena::moveRats()
 		Rat* rp = m_rats[k];
 		rp->move();
 
-		if (m_player != nullptr  &&
-			rp->row() == m_player->row() && rp->col() == m_player->col())
+		if (m_player != nullptr  &&rp->row() == m_player->row() && rp->col() == m_player->col())
 			m_player->setDead();
+		int r = rp->row();
+		int c = rp->col();
+		if (this->getCellStatus(r, c) == HAS_POISON) {
+			setCellStatus(r, c, EMPTY);
+			if (!rp->isDead())
+				m_History->record(r, c);
+		}
 
 		if (rp->isDead())
 		{
@@ -216,8 +222,4 @@ void Arena::checkPos(int r, int c) const
 			<< c << ")" << endl;
 		exit(1);
 	}
-}
-
-History *Arena::history() {
-	return m_History;
 }

@@ -22,7 +22,6 @@ public:
 	int     getCellStatus(int r, int c) const;
 	int     numberOfRatsAt(int r, int c) const;
 	void    display(string msg) const;
-	History* history();
 	// Mutators
 	void setCellStatus(int r, int c, int status);
 	bool addRat(int r, int c);
