@@ -13,7 +13,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 //  Arena implementation
 ///////////////////////////////////////////////////////////////////////////
-Arena::Arena(int nRows, int nCols)
+Arena::Arena(int nRows, int nCols):m_History(nRows, nCols)
 {
 	if (nRows <= 0 || nCols <= 0 || nRows > MAXROWS || nCols > MAXCOLS)
 	{
@@ -29,7 +29,6 @@ Arena::Arena(int nRows, int nCols)
 	for (int r = 1; r <= m_rows; r++)
 		for (int c = 1; c <= m_cols; c++)
 			setCellStatus(r, c, EMPTY);
-	m_History = new History(nRows, nCols);
 }
 
 Arena::~Arena()
@@ -82,7 +81,9 @@ void Arena::display(string msg) const
 	char displayGrid[MAXROWS][MAXCOLS];
 	int r, c;
 	if (msg[0] == 'h') {
-		m_History->display();
+		m_History.display();
+		printf("Press enter to continue.");
+		getchar();
 	}
 	// Fill displayGrid with dots (empty) and stars (poison pellets)
 	for (r = 1; r <= rows(); r++)
@@ -187,7 +188,7 @@ void Arena::moveRats()
 		if (this->getCellStatus(r, c) == HAS_POISON) {
 			setCellStatus(r, c, EMPTY);
 			if (!rp->isDead())
-				m_History->record(r, c);
+				m_History.record(r, c);
 		}
 
 		if (rp->isDead())
@@ -206,7 +207,7 @@ void Arena::moveRats()
 	}
 
 	// Another turn has been taken
-	m_turns++;
+		m_turns++;
 }
 
 bool Arena::isPosInBounds(int r, int c) const
@@ -222,4 +223,8 @@ void Arena::checkPos(int r, int c) const
 			<< c << ")" << endl;
 		exit(1);
 	}
+}
+
+History& Arena::history() {
+	return m_History;
 }

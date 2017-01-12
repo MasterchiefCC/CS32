@@ -99,14 +99,14 @@ void Game::play()
 	while (!m_arena->player()->isDead() && m_arena->ratCount() > 0)
 	{
 		string msg = takePlayerTurn();
-
+		
 		Player* player = m_arena->player();
 		if (player->isDead())
 		{
 			cout << msg << endl;
 			break;
 		}
-		m_arena->moveRats();
+		if(msg[0]!='h')m_arena->moveRats();
 		m_arena->display(msg);
 	}
 	if (m_arena->player()->isDead())

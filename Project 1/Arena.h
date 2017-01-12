@@ -27,6 +27,7 @@ public:
 	bool addRat(int r, int c);
 	bool addPlayer(int r, int c);
 	void moveRats();
+	History& history();
 
 private:
 	int     m_grid[MAXROWS][MAXCOLS];
@@ -36,7 +37,7 @@ private:
 	Rat*    m_rats[MAXRATS];
 	int     m_nRats;
 	int     m_turns;
-	History*m_History;
+	History m_History;
 	// Helper functions
 	void checkPos(int r, int c) const;
 	bool isPosInBounds(int r, int c) const;

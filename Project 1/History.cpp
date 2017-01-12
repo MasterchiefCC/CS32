@@ -8,8 +8,6 @@
 using namespace std;
 #include "History.h"
 
-History::History() {};
-
 History::History(int nRows, int nCols) {
 	m_Rows = nRows;
 	m_Cols = nCols;
@@ -42,7 +40,6 @@ void History::display() const {
 		}
 		cout << endl;
 	}
-	getchar();
-	clearScreen();
+	printf("\n");
 
 }
