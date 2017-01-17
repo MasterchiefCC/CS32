@@ -3,7 +3,6 @@
 #include "globals.h"
 class History {
 public:
-	History();
 	History(int nRows, int nCols);
 	bool record(int r, int c);
 	void display() const;

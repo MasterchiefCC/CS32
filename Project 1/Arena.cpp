@@ -1,3 +1,7 @@
+#include "Arena.h"
+#include "Rat.h"
+#include "Player.h"
+#include "globals.h"
 #include <iostream>
 #include <string>
 #include <random>
@@ -5,10 +9,7 @@
 #include <cstdlib>
 #include <cctype>
 using namespace std;
-#include "Arena.h"
-#include "Rat.h"
-#include "Player.h"
-#include "globals.h"
+
 
 ///////////////////////////////////////////////////////////////////////////
 //  Arena implementation

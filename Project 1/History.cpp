@@ -1,3 +1,5 @@
+#include "History.h"
+#include "globals.h"
 #include <iostream>
 #include <string>
 #include <random>
@@ -6,7 +8,7 @@
 #include <cctype>
 #include <cstring>
 using namespace std;
-#include "History.h"
+
 
 History::History(int nRows, int nCols) {
 	m_Rows = nRows;

@@ -1,6 +1,6 @@
 #ifndef PLAYER
 #define PLAYER
-#include<string>;
+#include<string>
 using namespace std;
 class Arena;
 
