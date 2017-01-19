@@ -1,0 +1,28 @@
+#include<iostream>
+#include<cstring>
+class string {
+public:
+	string(const char*value="");//Default parameters with C++ constructors
+private:
+	char*m_text;
+	int m_len;
+	/*Invariant:
+	either:
+	m_text points to an array of char; m_len>0
+	||
+	m_text points to an nullptr; m_len=0
+	*/
+};
+
+string::string(const char*value) {//nullptr will crush
+	m_len = strlen(value);
+	m_text = new char[m_len+1];
+	strcpy(m_text, value);
+}
+
+
+int main() {
+	string t;
+
+	return 0;
+}
