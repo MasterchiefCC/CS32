@@ -47,3 +47,10 @@ unsigned long ScoreList::maximum()const {
 	}
 	return maxm;
 }
+ScoreList& ScoreList::operator=(const ScoreList&other) {
+	this->m_score = other.m_score;
+	return *this;
+}
+ScoreList::ScoreList(const ScoreList&other) {
+	this->m_score = other.m_score;
+}

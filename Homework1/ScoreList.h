@@ -9,7 +9,8 @@ class ScoreList
 {
 public:
 	ScoreList();       // Create an empty score list.
-
+	ScoreList(const ScoreList&other);
+	ScoreList& operator=(const ScoreList&other);
 	bool add(unsigned long score);
 	// If the score is valid (a value from 0 to 100) and the score list
 	// has room for it, add it to the score list and return true.
@@ -28,7 +29,7 @@ public:
 	unsigned long maximum() const;
 	// Return the highest score in the score list.  If the list is
 	// empty, return NO_SCORE.
-
+	
 private:
 	Sequence m_score;
 };

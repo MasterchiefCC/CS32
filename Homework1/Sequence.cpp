@@ -48,7 +48,7 @@ int Sequence::insert(const ItemType& value) {
 bool Sequence::erase(int pos) {
 	if (pos < 0 || pos >= size())return 0;
 	if (pos == size() - 1) {  m_size--; return 1; }
-	for (int a = pos; a < size(); a++)m_value[a] = m_value[a + 1];
+	for (int a = pos; a+1 < size(); a++)m_value[a] = m_value[a + 1];
 	m_size--;
 	return 1;
 }
@@ -102,6 +102,19 @@ void Sequence::swap(Sequence& other) {
 	this->m_size = this->m_size - other.m_size;
 }
 
+Sequence& Sequence::operator=(const Sequence&other) {
+	this->m_size = other.m_size;
+	for (int a = 0; a < other.size(); a++)
+		this->m_value[a] = other.m_value[a];
+	return *this;
+}
 
+Sequence::Sequence(const Sequence&other) {
+	this->m_size = other.m_size;
+	for (int a = 0; a < other.size(); a++)
+		this->m_value[a] = other.m_value[a];
+}
+Sequence::~Sequence() {
+}
 
 

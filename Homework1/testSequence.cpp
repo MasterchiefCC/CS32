@@ -1,19 +1,23 @@
 #include "Sequence.h"
 #include <iostream>
 #include <cassert>
-#include <string>
 using namespace std;
+
+void test()
+{
+  Sequence s;
+  assert(s.insert(0, 10));
+  assert(s.insert(0, 20));
+  assert(s.size() == 2);
+  ItemType x = 999;
+  assert(s.get(0, x) && x == 20);
+  assert(s.get(1, x) && x == 10);
+  Sequence a(s);
+  Sequence b = s;
+}
 
 int main()
 {
-	Sequence s;
-	s.insert(0, "dosa");
-	s.insert(1, "pita");
-	s.insert(2, "");
-	s.insert(3, "matzo");
-	assert(s.find("") == 2);
-	s.remove("dosa");
-	assert(s.size() == 3 && s.find("pita") == 0 && s.find("") == 1 &&
-		s.find("matzo") == 2);
-	cerr << "pass\n";
+  test();
+  cout << "Passed all tests" << endl;
 }

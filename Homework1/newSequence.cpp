@@ -104,8 +104,28 @@ void Sequence::swap(Sequence& other) {
 	this->m_size = this->m_size + other.m_size;
 	other.m_size = this->m_size - other.m_size;
 	this->m_size = this->m_size - other.m_size;
+}
 
-	
+Sequence::~Sequence() {
+	delete[] m_value;
+}
+
+Sequence::Sequence(const Sequence&other) {
+	this->m_size = other.m_size;
+	this->m_maxm = other.m_maxm;
+	this->m_value = new ItemType[this->m_maxm];
+	for (int a = 0; a < this->m_maxm; a++)
+		this->m_value[a] = other.m_value[a];
+}
+
+Sequence& Sequence::operator=(const Sequence&other) {
+	this->m_size = other.m_size;
+	this->m_maxm = other.m_maxm;
+	delete [] this->m_value;
+	this->m_value = new ItemType[this->m_maxm];
+	for (int a = 0; a < this->m_maxm; a++)
+		this->m_value[a] = other.m_value[a];
+	return *this;
 }
 
 
