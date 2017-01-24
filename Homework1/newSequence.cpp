@@ -119,9 +119,11 @@ Sequence::Sequence(const Sequence&other) {
 }
 
 Sequence& Sequence::operator=(const Sequence&other) {
+	if (this == &other)return *this;
 	this->m_size = other.m_size;
 	this->m_maxm = other.m_maxm;
-	delete [] this->m_value;
+	if(this->m_value!=nullptr)
+		delete [] this->m_value;
 	this->m_value = new ItemType[this->m_maxm];
 	for (int a = 0; a < this->m_maxm; a++)
 		this->m_value[a] = other.m_value[a];
