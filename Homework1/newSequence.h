@@ -14,6 +14,10 @@ public:
 
 	Sequence& operator=(const Sequence& other);
 
+	~Sequence();//destructor
+
+	Sequence(const Sequence&other);//copy constructor
+
 	bool empty() const;// Return true if the sequence is empty, otherwise false.
 
 	int size() const;    // Return the number of items in the sequence.
@@ -67,10 +71,7 @@ public:
 	void swap(Sequence& other);
 	// Exchange the contents of this sequence with the other one.
 	
-	~Sequence();
-	//destructor
 
-	Sequence(const Sequence&other);
 private:
 	int m_size;
 	int m_maxm;

@@ -6,18 +6,16 @@ ScoreList::ScoreList():m_score(){
 }
 
 bool ScoreList::add(unsigned long score) {
-	if (score >= 0 && score <= 100) {
-		m_score.insert(score);
-		return 1;
-	}
-	return 0;
+	if (score >= 0 && score <= 100) 
+		return m_score.insert(score) !=-1;
+	return false;
 }
 
 bool ScoreList::remove(unsigned long score) {
 	int pos = m_score.find(score);
-	if (!pos)return 0;
+	if (pos==-1)return false;
 	m_score.erase(pos);
-	return 1;
+	return true;
 }
 
 int ScoreList::size() const{
@@ -46,11 +44,4 @@ unsigned long ScoreList::maximum()const {
 		if (temp > maxm)maxm = temp;
 	}
 	return maxm;
-}
-ScoreList& ScoreList::operator=(const ScoreList&other) {
-	this->m_score = other.m_score;
-	return *this;
-}
-ScoreList::ScoreList(const ScoreList&other) {
-	this->m_score = other.m_score;
 }

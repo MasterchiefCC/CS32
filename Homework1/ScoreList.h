@@ -9,8 +9,7 @@ class ScoreList
 {
 public:
 	ScoreList();       // Create an empty score list.
-	ScoreList(const ScoreList&other);
-	ScoreList& operator=(const ScoreList&other);
+
 	bool add(unsigned long score);
 	// If the score is valid (a value from 0 to 100) and the score list
 	// has room for it, add it to the score list and return true.

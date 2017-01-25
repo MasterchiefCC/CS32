@@ -11,8 +11,6 @@ class Sequence
 {
 public:
 	Sequence();    // Create an empty sequence (i.e., one whose size() is 0).
-	~Sequence();
-	Sequence(const Sequence&other);
 	bool empty() const;// Return true if the sequence is empty, otherwise false.
 
 	int size() const;    // Return the number of items in the sequence.
@@ -65,7 +63,6 @@ public:
 
 	void swap(Sequence& other);
 	// Exchange the contents of this sequence with the other one.
-	Sequence& operator=(const Sequence&other);
 private:
 	int m_size;
 	ItemType m_value[DEFAULT_MAX_ITEMS];
