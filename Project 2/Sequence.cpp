@@ -4,6 +4,7 @@ Sequence::Sequence() {
 	head = new Node;
 	head->m_next = head;
 	head->m_previous = head;
+	m_size = 0;
 }
 
 Sequence::~Sequence() {
@@ -26,7 +27,7 @@ int Sequence::size() const {
 }
 
 bool Sequence::insert(int pos, const ItemType&value) {
-	if (pos<0 || pos>size())return false;
+	if (pos<0 || pos>m_size)return false;
 	Node*p = head;
 	for (int a = 0; a <= pos; a++)
 		p = p->m_next;
@@ -40,12 +41,14 @@ bool Sequence::insert(int pos, const ItemType&value) {
 	return true;
 }
 
-bool Sequence::insert(const ItemType& value) {
+int Sequence::insert(const ItemType& value) {
 	Node*p = head;
+	int pos = 0;
 	while (1) {
 		if (p->m_next->m_value == value)break;
 		if (p->m_next == head)break;
 		p = p->m_next;
+		pos++;
 	}
 	Node*insert = new Node;
 	insert->m_previous = p;
@@ -54,7 +57,7 @@ bool Sequence::insert(const ItemType& value) {
 	p->m_next->m_previous = insert;
 	p->m_next = insert;
 	m_size++;
-	return true;
+	return pos;
 }
 
 bool Sequence::erase(int pos) {
