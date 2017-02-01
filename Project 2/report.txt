@@ -1,0 +1,397 @@
+#include "Sequence.h"
+
+Sequence::Sequence() {
+Create an empty sequence (i.e., one whose size() is 0).
+	Create a node store the head 
+	point the head pointer's next and previous to head
+	set the size to 0
+}
+
+Sequence::~Sequence() {
+	pre pointer point to head
+	pos pointer point to the first obj
+	loop
+		delete the obj in pre pointer
+		condition when loop stop
+		move to pre to pre->next to delete next obj
+		move p to p->next to give direction to next obj
+
+}
+
+
+bool Sequence::empty()const {
+	return the reverse value of size
+}
+
+int Sequence::size() const {
+	return the size
+}
+
+bool Sequence::insert(int pos, const ItemType&value) {
+	the condition when can't insert a value
+	create pointer p point head
+	loop to move to certain position
+	
+	create a new Node
+	link new node's next to original pos
+	link new node's pre to p's pre
+	link p's pre 's next' s pointer to new node
+	link p's pre pointer to new node
+	assign the value to new node
+	increase the size
+	successfully insert
+}
+
+int Sequence::insert(const ItemType& value) {
+	initiate a pointer p point head
+	counter for pointer
+	loop to find previous position which should insert the value
+	
+	create a new node
+	link the new node 's pre to p pointer
+	link the new node 's next to p's next node
+	assign the value
+	point the pre node of the next node of p to the new node
+	point the p's next to the new node
+	increase the size
+	return the position where insert
+}
+
+bool Sequence::erase(int pos) {
+	the condition when can't erase pos
+	initiate a pointer point to head
+	loop to find that position
+	
+	link the pre node of the next node of position to the previous node of P
+	link the next node of the previous node of position to the next node of P
+	decrease the size
+	delete pos value
+	successfully deleted
+}
+
+int Sequence::remove(const ItemType& value) {
+	initiate a pointer to the first obj
+	counter for removed obj
+	loop to find the value
+		when same:
+			link the pre node to the next node
+			initiate a temp pointer point to p
+			move to next obj
+			increase the size
+			decrease the size
+			delete the node has same value
+			move to next step
+
+		if the value is not same move to next obj
+
+	return the number of removed obj
+}
+
+bool Sequence::get(int pos, ItemType& value) const {
+	the condition false
+	initiate a pointer points to head
+	loop to the pos
+
+	assign the value to the value on position
+	successfully return the value
+}
+
+bool Sequence::set(int pos, const ItemType& value) {
+	if (pos < 0 || pos >= size())return false;//condition of false
+	Node*p = head;//initiate a pointer points to head
+	for (int a = 0; a <= pos; a++)//loop to the pos
+		p = p->m_next;
+	p->m_value = value;//reassign the value
+	return true;//successfully set the new value
+}
+
+int Sequence::find(const ItemType& value) const {
+	point the first obj
+	loop to find obj 's value equals to value
+		if find such value return position
+		if not move to next obj
+	
+	if no such value return -1
+}
+
+void Sequence::swap(Sequence& other) {
+	initiate a temp pointer points to itself 's head
+	change the head of obj itself to other
+	change the head of other obj to this 's head
+	//exchange the size
+
+}
+
+Sequence::Sequence(const Sequence& other) {
+	assign this obj size
+	create a node for this
+	initiate a pointer point to this 's head
+	initiate a pointer point to other's head
+	loop to creat
+		create a new node
+		point next node ' s previous pointer to the previous one
+		assign value
+		move to next obj
+		ThisP = ThisP->m_next;
+
+	link the last obj to head
+	link the head to last obj
+}
+
+Sequence& Sequence::operator=(const Sequence& other) {
+	when addresses are not the same
+		create a temp sequence which copy the other
+		this swap with temp
+	
+	!!return *this;
+}
+
+int subsequence(const Sequence& seq1, const Sequence& seq2) {
+	condition of false
+	creat a value to be switch
+	creat a value to be position
+	two variables store value
+	loop to check
+		get value
+		
+		if at the value of sequence 1 at pos a is equal to the value of sequence 2 at pos 0
+			switch on
+			pos equal to a
+			loop to check is the value a+b in sequence 1 is equal to value a in sequence 2
+				if false to get value switch off and break the loop
+				if not equal, switch off and break the loop
+			if successfully pass the loop above, return pos
+		if no such pos return -1
+}
+
+void interleave(const Sequence& seq1, const Sequence& seq2, Sequence& result) {
+	clear result
+	if seq1 is empty, assign seq2 to result
+	if seq2 is empty assign seq1 to result
+	create two value to store value
+	position counter
+	loop to insert value
+		get value from seq1
+			insert value to sequence result
+			increase the position counter
+
+		get value for seq2
+			insert value to sequence result
+			increase the position counter
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+testcode
+
+#include <iostream>
+#include <cassert>
+#include "Sequence.h"
+using namespace std;
+/*void testSubSeq() {
+	Sequence e;
+	e.insert(0, 32);
+	e.insert(1, 21);
+	e.insert(2, 63);
+	e.insert(3, 42);
+	e.insert(4, 17);
+	e.insert(5, 63);
+	e.insert(6, 17);
+	e.insert(7, 29);
+	e.insert(8, 8);
+	e.insert(9, 32);
+	Sequence a;
+	a.insert(0, 63);
+	a.insert(1, 17);
+	a.insert(2, 29);
+	assert(subsequence(e, a) == 5);
+	Sequence b;
+	b.insert(0, 17);
+	b.insert(1, 63);
+	b.insert(2, 29);
+	assert(subsequence(e, b) == -1);
+	Sequence c;
+	c.insert(0, 8);
+	c.insert(1, 32);
+	assert(subsequence(e, c) == 8);
+	c.insert(2, 100);
+	assert(subsequence(e, c) == -1);
+	interleave(e, c, a);
+
+}
+
+#define CHECKTYPE(f, t) { auto p = (t)(f); (void)p; }
+
+static_assert(std::is_default_constructible<Sequence>::value,
+	"Sequence must be default-constructible.");
+static_assert(std::is_copy_constructible<Sequence>::value,
+	"Sequence must be copy-constructible.");
+
+void thisFunctionWillNeverBeCalled()
+{
+	CHECKTYPE(&Sequence::operator=, Sequence& (Sequence::*)(const ItemType&));
+	CHECKTYPE(&Sequence::empty, bool (Sequence::*)() const);
+	CHECKTYPE(&Sequence::size, int  (Sequence::*)() const);
+	CHECKTYPE(&Sequence::insert, bool (Sequence::*)(int, const ItemType&));
+	CHECKTYPE(&Sequence::insert, int (Sequence::*)(const ItemType&));
+	CHECKTYPE(&Sequence::erase, bool (Sequence::*)(int));
+	CHECKTYPE(&Sequence::remove, int  (Sequence::*)(const ItemType&));
+	CHECKTYPE(&Sequence::get, bool (Sequence::*)(int, ItemType&) const);
+	CHECKTYPE(&Sequence::set, bool (Sequence::*)(int, const ItemType&));
+	CHECKTYPE(&Sequence::find, int  (Sequence::*)(const ItemType&) const);
+	CHECKTYPE(&Sequence::swap, void (Sequence::*)(Sequence&));
+	CHECKTYPE(subsequence, int(*)(const Sequence&, const Sequence&));
+	CHECKTYPE(interleave, void(*)(const Sequence&, const Sequence&, Sequence&));
+}
+
+
+/*int main() {
+	Sequence s;
+	assert(s.insert(0, 1));
+	assert(s.insert(1, 2));
+	assert(s.size() == 2);
+
+	for (int a = 1; a < 5; a++)
+		s.insert(a);
+	s.erase(4);
+	ItemType a;
+	s.get(1, a);
+	assert(s.get(1, a) == 1 && a == 1);
+	assert(s.remove(1) == 2);
+	s.set(1, 100);
+	assert(s.find(100) == 1);
+
+	Sequence b;
+	for (int y = 0; y < 100; y++)
+		b.insert(y);
+	b.swap(s);
+	Sequence c(b);
+	Sequence d;
+	d = c;
+	testSubSeq();
+	Sequence t;
+	for (int a = 0; a < 3; a++)
+		t.insert(a);
+	Sequence u;
+	for (int y = 0; y < 7; y++)
+		u.insert(y);
+	interleave(u, t, d);
+	return 0;
+}*/
+int main() {
+	Sequence s;
+	Sequence a;
+
+	assert(s.empty()); // check to see if s set is empty
+	assert(a.empty()); // check to see if a set is empty
+
+	for (int i = 0; i < 200; i++)
+	{
+		s.insert(i);        // Insert 200 items in s
+	}
+
+	assert(s.size() == 200);    // Check to see if s contains 200
+	s.swap(a);  // Swap the random values from a for numbers 0-200 into a
+	assert(a.size() == 200);    // Check to see if the size is 200
+	for (int k = 0; k < 100; k++)
+	{
+		a.remove(k);    //remove the first 100 numbers
+	}
+	assert(a.size() == 100);    // Checks if size is now 100
+
+	Sequence r;
+	r.insert(r.size(), 21); // Inserts at the last position
+	r.insert(r.size(), 42); // Inserts at the last position
+	assert(r.find(42) == 1);    // checks to see if find is input in the correct location
+	assert(!r.insert(5, 69));   // makes sure that we cant insert something into a position thats greater than the size
+	assert(!r.erase(3));    // makes sure we cant erase something at a position that is greater than the size
+	assert(r.erase(1));     // erases whats at position 1, which in this case is 42
+	assert(r.size() == 1);
+	unsigned long swag = 33;
+	assert(r.get(0, swag) && swag == 21);   // tests to make sure that at position 0 we have 21 and x will get that value
+	unsigned long remix = 968;
+	assert(r.set(0, remix) && r.find(968) == 0);    // replaces 21 with 968 at position 0 and makes sure its located there using find
+	cout << "Passed all tests" << endl;
+
+	Sequence seq1;
+	seq1.insert(0, 30);  // The following inserts test if the data is correctly inserted in the sequence
+	seq1.insert(1, 21);
+	seq1.insert(2, 63);
+	seq1.insert(3, 42);
+	seq1.insert(4, 17);
+	seq1.insert(5, 63);
+	seq1.insert(6, 17);
+	seq1.insert(7, 29);
+	seq1.insert(8, 8);
+	seq1.insert(9, 32);
+	Sequence seq2;
+	seq2.insert(0, 17);
+	seq2.insert(1, 63);
+	seq2.insert(2, 29);
+	assert(subsequence(seq1, seq2) == -1);    // tests that seq2 is not a subsequence of seq2
+	seq2 = seq1;                            // Tests that the assignment operator works, which in turn means the copy constructor works since it is implemented using the copy swap method
+	assert(subsequence(seq1, seq2) == 0);   // now that seq1 and seq2 are the same, they are a subsequence of each other starting at 0
+	assert(subsequence(seq1, seq1) == 0);   // Checks that subsequence works for aliasing.
+	assert(seq2.size() == seq1.size());
+	assert(seq2.find(42) == 3 && seq2.find(29) == 7);
+	Sequence seq3;
+	Sequence seq4;
+	Sequence result;
+	for (int p = 0; p < 55; p++)    // insert 0-54 into result in positions 0-54
+	{
+		result.insert(p, p);
+	}
+	ItemType arr1[6] = { 30, 21, 63, 42, 17, 63 };
+	ItemType arr2[4] = { 42,63,84,19 };
+	for (int j = 0; j < 6; j++)
+		seq3.insert(j, arr1[j]);
+	for (int k = 0; k < 4; k++)
+		seq4.insert(k, arr2[k]);
+	interleave(seq3, seq4, result); // Interleave test(m>n)
+	assert(result.find(30) == 0 && result.find(19) == 7); // Makes sure that the values from seq3 and seq4 have been correctly input.
+	interleave(seq3, seq2, result); // Interleave test(m<n)
+	assert(result.find(30) == 0 && result.find(32) == 15);  // Makes sure that the values from seq3 and seq2 have been correctly input.
+	interleave(seq2, seq1, result); //Interleave test (m = n)
+	assert(result.find(30) == 0 && result.size() == 2 * seq2.size()); // Makes sure the values from seq2 and seq1 have been correctly input and if so, since their sizes are equal results size should be two times seq1 or seq2's size.
+	interleave(seq1, seq1, seq1); // Tests for aliasing
+	assert(result.size() == 20);
+	Sequence test;
+	assert(test.insert(100)==0);
+	assert(test.insert(65)==0);
+	assert(test.insert(34)==0);
+	assert(test.insert(41)==1);
+	assert(test.insert(99)==test.size()-2);
+	assert(test.insert(9000)==test.size()-1);
+	assert(test.find(34) == 0 && test.find(9000) == test.size() - 1); // Makes sure insert works correctly, making sure values are inputed in ascending order.
+	Sequence hi(test);
+	assert(hi.find(34) == 0 && test.find(9000) == test.size() - 1); // Ensures the copy constructor works properly.
+	Sequence k;
+	for (int a = 0; a < 5; a++)
+		k.insert(a);
+	Sequence z(k);
+	result = z = k;
+	z = z;
+	return 0;
+}

@@ -4,15 +4,15 @@
 #include <stdio.h>
 #include <string>
 
-typedef unsigned long ItemType;
+typedef std::string ItemType;
 
 class Sequence
 {
 public:
-	Sequence();    // Create an empty sequence (i.e., one whose size() is 0).
+	/*Sequence();    
 	Sequence& operator=(const Sequence& other);
 
-	~Sequence();//destructor
+	~Sequence();
 
 	Sequence(const Sequence&other);//copy constructor
 
@@ -68,11 +68,25 @@ public:
 
 	void swap(Sequence& other);
 	// Exchange the contents of this sequence with the other one.
-
+	*/
+public:
+	Sequence();// Create an empty sequence (i.e., one whose size() is 0).
+	~Sequence();//destructor
+	Sequence(const Sequence&other);
+	Sequence& operator=(const Sequence&other);
+	bool empty() const;
+	int size() const;
+	bool insert(int pos, const ItemType& value);
+	int insert(const ItemType& value);
+	bool erase(int pos);
+	int remove(const ItemType& value);
+	bool get(int pos, ItemType& value) const;
+	bool set(int pos, const ItemType& value);
+	int find(const ItemType& value) const;
+	void swap(Sequence& other);
 
 private:
-	struct Node
-	{
+	struct Node{
 		ItemType m_value;
 		Node* m_next;
 		Node* m_previous;
