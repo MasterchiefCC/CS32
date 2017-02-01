@@ -13,6 +13,7 @@ private:
 };
 
 bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec) {
+	int counter = 0;
 	queue<Coord> coordStack;
 	Coord init(sr, sc);
 	coordStack.push(init);
@@ -26,7 +27,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
 		for (int a = -1; a <= 1; a++)
 			for (int b = -1; b <= 1; b++) {
 				if (a == b)continue;
-				if (tr + a >= 0 && tc + b >= 0&& tr+a<nRows && tc+b<nCols && maze[tr + a][tc + b] == '.') {
+				if (tr + a >= 0 && tr + a < nRows&&tc + b < nCols&& tc + b >= 0 && maze[tr + a][tc + b] == '.') {
 					Coord pushin(tr + a, tc + b);
 					coordStack.push(pushin);
 				}

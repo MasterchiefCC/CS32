@@ -11,7 +11,7 @@ int precedence(char ch){
 	case '&':      
 		return 1;
 	case '|':
-		return 1; 
+		return 0; 
 	default:
 		return -1;
 	}
@@ -96,8 +96,7 @@ void test1() {
 	};
 	string pf;
 	bool answer;
-	//evaluate("2| 3", ba, pf, answer);
-	//assert(evaluate("2| 3", ba, pf, answer) == 0  &&  answer);
+	assert(evaluate("2| 3", ba, pf, answer) == 0 && pf == "23|" &&  answer);
 	assert(evaluate("8|", ba, pf, answer) == 1);
 	assert(evaluate("4 5", ba, pf, answer) == 1);
 	assert(evaluate("01", ba, pf, answer) == 1);
@@ -106,13 +105,13 @@ void test1() {
 	assert(evaluate("2(&8)", ba, pf, answer) == 1);
 	assert(evaluate("(6&(7|7)", ba, pf, answer) == 1);
 	assert(evaluate("", ba, pf, answer) == 1);
-	assert(evaluate("4  |  !3 & (0&3) ", ba, pf, answer) == 0
-		&& !answer);
-	assert(evaluate(" 9  ", ba, pf, answer) == 0 && !answer);
+	evaluate("4  |  !3 & (0&3) ", ba, pf, answer);
+	assert(evaluate("4  |  !3 & (0&3) ", ba, pf, answer) == 0&& pf == "43!03&&|" && !answer);
+	assert(evaluate(" 9  ", ba, pf, answer) == 0 && pf == "9" && !answer);
 	ba[2] = false;
 	ba[9] = true;
-	assert(evaluate("((9))", ba, pf, answer) == 0 && answer);
-	assert(evaluate("2| 3", ba, pf, answer) == 0 && !answer);
+	assert(evaluate("((9))", ba, pf, answer) == 0 && pf == "9"  &&  answer);
+	assert(evaluate("2| 3", ba, pf, answer) == 0 && pf == "23|" && !answer);
 	cout << "Passed all tests" << endl;
 }
 int main(){
