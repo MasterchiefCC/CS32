@@ -13,8 +13,14 @@ private:
 };
 
 bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec) {
-	int counter = 0;
 	queue<Coord> coordStack;
+	char **mazeC = (char**)malloc(sizeof(char*)*nRows);
+	for (int a = 0; a < nRows; a++)
+		mazeC[a] = (char*)malloc(sizeof(char)*nCols);
+	for (int a = 0; a < nRows; a++)
+		for (int b = 0; b < nCols; b++)
+			mazeC[a][b] = maze[a][b];
+
 	Coord init(sr, sc);
 	coordStack.push(init);
 	while (!coordStack.empty()) {
@@ -22,17 +28,17 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
 		coordStack.pop();
 		int tr = temp.r();
 		int tc = temp.c();
-		if (tr == er&&tc == ec) return true;
-		maze[tr][tc] = 'X';
+		if (tr == er&&tc == ec) { for (int a = 0; a < nRows; a++){free(mazeC[a]);} free(mazeC); return true; }
+		mazeC[tr][tc] = 'X';
 		for (int a = -1; a <= 1; a++)
 			for (int b = -1; b <= 1; b++) {
-				if (a == b)continue;
-				if (tr + a >= 0 && tr + a < nRows&&tc + b < nCols&& tc + b >= 0 && maze[tr + a][tc + b] == '.') {
+				if (a!=b&&a+b!=0&&tr + a >= 0 && tc + b >= 0&& tr+a<nRows && tc+b<nCols && mazeC[tr + a][tc + b] == '.') {
 					Coord pushin(tr + a, tc + b);
 					coordStack.push(pushin);
 				}
 			}
 	}
+	for (int a = 0; a < nRows; a++){ free(mazeC[a]);} free(mazeC);
 	return false;
 }
 
@@ -52,6 +58,10 @@ int main()
 		"XXXXXXXXXX"
 	};
 
+	if (pathExists(maze, 10, 10, 6, 4, 6, 1))
+		cout << "Solvable!" << endl;
+	else
+		cout << "Out of luck!" << endl;
 	if (pathExists(maze, 10, 10, 6, 4, 1, 1))
 		cout << "Solvable!" << endl;
 	else

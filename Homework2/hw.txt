@@ -25,3 +25,10 @@
 7, 5
 3, 4
 4, 5
+
+
+The reason we get different coordinates is because two Abstract Data Types is different. 
+The stack is based on a LIFO (Last one In First one Out) principle. Therefore it works by checking all the most current coordinates that have been pushed onto the stack.
+Since our algorithm goes North, East, South, West, it will pop them off in reverse order. What this means is that the stack will go from out to inwards, going from the newest item to the oldest until it reaches the endpoint.
+The Queue on the other hand works on a FIFO (First one In First one Out) principle and will thus work inwards to outwards. So as we get North, East, South, West coordinates, the queue will pop them off in that order.
+It must be noted that both algorithms pop off the startpoint to begin with, because we do so before we even check other possibilities to make sure our startpoint isn¡¯t the endpoint.
