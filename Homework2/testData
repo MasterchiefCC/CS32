@@ -1,0 +1,91 @@
+Homework 2 Test Data
+
+For this homework, we graded mazestack.cpp, mazequeue.cpp, and eval.cpp.
+
+We ran your pathExists function from mazestack.cpp on four mazes, and the version from mazequeue.cpp on the same four mazes. Each of the eight tests was worth 4 points. Here are the mazes:
+
+	string maze1[10] = {
+	  "XXXXXXXXXX'",
+	  "X.X..X...X'",
+	  "X.XX.X.XXX'",
+	  "X....X.X.X'",
+	  "XX.X.X...X'",
+	  "XXX..X.X.X'",
+	  "X...X...XX'",
+	  "X.XX..X.XX'",
+	  "X....X...X'",
+	  "XXXXXXXXXX'",
+	};
+	
+	string maze2[10] = {
+	  "XXXXXXXXXX'",
+	  "X.X..X...X'",
+	  "XXXX.X.XXX'",
+	  "X....X.X.X'",
+	  "XX.X.X...X'",
+	  "XXX..X.X.X'",
+	  "X...X...XX'",
+	  "X.XX..X.XX'",
+	  "X....X...X'",
+	  "XXXXXXXXXX'",
+	};
+	
+	string maze3[10] = {
+	  "XXXXXXXXXX'",
+	  "XX.....XXX'",
+	  "X..XX....X'",
+	  "X...X...XX'",
+	  "X.X.XXX..X'",
+	  "XXXX..X..X'",
+	  "XX....X..X'",
+	  "X.......XX'",
+	  "X..XXXXXXX'",
+	  "XXXXXXXXXX'",
+	};
+	
+	string maze4[10] = {
+	  "XXXXXXXXXX'",
+	  "XX.....XXX'",
+	  "X..XX....X'",
+	  "X...X...XX'",
+	  "X.X.XXX..X'",
+	  "XXXX..X..X'",
+	  "XX....X..X'",
+	  "X.X.....XX'",
+	  "X..XXXXXXX'",
+	  "XXXXXXXXXX'",
+	};
+
+	assert(pathExists(maze1, 10, 10, 8, 6, 1, 1));
+	assert(!pathExists(maze2, 10, 0, 8, 6, 1, 1));
+	assert(pathExists(maze3, 10, 10, 4, 3, 7, 1));
+	assert(!pathExists(maze4, 10, 10, 4, 3, 7, 1));
+We tried your evaluate function from eval.cpp on 21 cases, each worth 2 to 4 points, with this array of values:
+
+	  0     1     2     3     4     5     6     7     8     9
+	true  false true  true  false false true  false true  false
+except that for the fourth test case, element 2 was set to false.
+
+points	infix	evaluate
+returns	postfix	result
+4	0	0	0	true
+4	2|2	0	22|	true
+4	2&2	0	22&	true
+4	2|2	0	22|	false
+4	2 & !1	0	21!&	true
+4	!(4|3)	0	43|!	false
+4	!5|6	0	5!6|	true
+4	8|7&9	0	879&|	true
+4	2&!(4|6&3|7)|!!!(9&2&5)	0	2463&|7|!&92&5&!!!|	true
+4	(3&((4|3)&(3)))	0	343|3&&	true
+3	(6|7)8	1	 	unchanged
+3	9&(&0)	1	 	unchanged
+3	1&|2	1	 	unchanged
+3	2!3	1	 	unchanged
+3	(4	1	 	unchanged
+3	5)	1	 	unchanged
+2	01	1	 	unchanged
+2	1:2	1	 	unchanged
+2	1&:	1	 	unchanged
+2	1 2&3	1	 	unchanged
+2	1& |2	1	 	unchanged
