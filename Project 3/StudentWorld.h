@@ -4,6 +4,7 @@
 #include "GameWorld.h"
 #include "GameConstants.h"
 #include "Field.h"
+#include"Compiler.h"
 #include <string>
 #include<list>
 #include<map>
@@ -30,10 +31,13 @@ public:
 	StudentWorld(std::string assetDir)
 		: GameWorld(assetDir), m_time(2000) {
 		for (int a = 0; a < 64; a++)for (int b = 0; b < 64; b++) {
-			m_map[a][b] = 0;
-			m_foodmap[a][b] = 0;
+			m_map[a][b] = -1;
+			m_foodmap[a][b] = -1;
 		}
-		for (int a = 0; a < 4; a++)noAnt[a] = -100;
+		for (int a = 0; a < 4; a++) {
+			noAnt[a] = -100; dead[a] = false;
+			H_dead[a] = false;
+		}
 	}
 
 	virtual int init();
@@ -48,10 +52,12 @@ public:
 	void setnoAnt(int index, int n) {
 		noAnt[index] = n;
 	}
+	bool hill2000(int index);
 	int getnoAnt(int index) {
 		return noAnt[index];
 	}
 	void del();
+	void setFood(nlist temp);
 private:
 	nmap m_Actors;
 	char m_map[64][64];
@@ -59,6 +65,9 @@ private:
 	int m_time;
 	int noAnt[4];
 	string nameOColony[4];
+	Compiler*m_C[4];
+	bool dead[4];
+	bool H_dead[4];
 };
 
 #endif // STUDENTWORLD_H_

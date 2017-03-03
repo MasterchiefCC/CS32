@@ -18,6 +18,7 @@ class Actor :public GraphObject {
 public:
 	Actor(int imageID, int startX, int startY, StudentWorld*s, int HP,Direction dir = none, int depth = 0, double size = 0.25)
 		:GraphObject(imageID, startX, startY, dir, depth, size), m_HP(HP), m_sleep(0) {
+		m_trapped = 0;
 		m_world = s;
 	}
 	virtual void doSomething() = 0;//every actor to do something, because actor don't have to do something, it is pure virtual function
@@ -28,11 +29,13 @@ public:
 	int setSleep(int sleep);//set Actor to sleep
 	int getSleep() const;//get the value that how many ticks should be sleep
 	int ranDirection();//set a random direction
-	Actor* gettrapped();//determine which water pool trap actor
-	Actor*setTrapped(Actor*temp);//set which water pool trap actor
+	bool gettrapped();//determine which water pool trap actor
+	void setTrapped(bool v);//set which water pool trap actor
 	bool isDead() {//determine whether or not the actor dead
-		return !m_HP;
+		if (m_HP > 0)return false;
+		else return true;
 	}
+	void addFood(int value);
 	virtual void setbite() {};//set bite for ant class
 	virtual int getID() { return 0; }//get colony number for ant
 	bool eat(int value);
@@ -40,7 +43,7 @@ private:
 	StudentWorld*m_world;
 	int m_HP;
 	int m_sleep;
-	Actor *m_trap;
+	bool m_trapped;
 };
 
 
@@ -64,11 +67,12 @@ public:
 	ants(int imageID, int startX, int startY, StudentWorld* stud, Compiler *compilerForEntrant, int ID)
 		: Actor(imageID, startX, startY, stud, 1500, none, 1, 0.25), m_coloney(compilerForEntrant), m_ID(ID), m_randnum(0), m_hfood(0), m_Smove(0), m_bite(0){
 		ranDirection();
+		ic = 0;
 	};
 	virtual void doSomething();//do something
 	void move();//ant's move
 	int StringtoInt(string temp);//convert a string to Int
-	void Eeat();// ant's eat
+	void eat();// ant's eat
 	void setbite() {
 		m_bite = true;
 	}//ant being bite by other insect
@@ -79,6 +83,7 @@ public:
 	virtual int getID() {//get colony number
 		return m_ID;
 	}
+	void pickup();
 private:
 	Compiler *m_coloney;
 	int m_ID;
@@ -87,6 +92,8 @@ private:
 	int m_hfood;
 	bool m_Smove;
 	bool m_bite;
+	int ic;
+	int cou;
 };
 
 class Pebble : public Actor {
@@ -116,7 +123,9 @@ public:
 		: Actor(IID_ANT_HILL, startX, startY, stud, 8999, right, 2, 0.25), m_compiler(compilerForEntrant), antID(antD) {
 	}
 	virtual void doSomething();
-	~Anthill();
+	virtual int getID() {
+		return antID;
+	}
 private:
 	Compiler* m_compiler;
 	int antID;
@@ -134,9 +143,9 @@ public:
 class Baby_Grasshopper : public Actor {
 public:
 	Baby_Grasshopper( int startX, int startY, StudentWorld*stud, int imageID=IID_BABY_GRASSHOPPER, int HP = 500, Direction direct = none, int depth = 1, double size = 0.25)
-		: Actor(imageID, startX, startY, stud, HP, direct, depth, size), m_distance(0){
+		: Actor(IID_BABY_GRASSHOPPER, startX, startY, stud, HP, direct, depth, size), m_distance(0){
 		int dir=ranDirection();
-		move();
+		m_distance = ran(2, 10);
 	};
 	void move();
 	virtual void doSomething();
@@ -148,11 +157,13 @@ class Adult_Grasshopper : public Baby_Grasshopper {
 public:
 	Adult_Grasshopper(int startX, int startY, StudentWorld*stud, int imageID=IID_ADULT_GRASSHOPPER, int HP = 1600, Direction direct = none, int depth = 1, double size = 0.25)
 		: Baby_Grasshopper( startX, startY, stud, imageID, HP, direct, 1, 0.25), m_distance(0) {
-		move();
+		ranDirection();
+		m_distance = ran(2, 10);
 	};
 	virtual void doSomething();
 	bool bite();
 	bool jump();
+
 private:
 	int m_distance;
 

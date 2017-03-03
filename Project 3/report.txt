@@ -1,0 +1,110 @@
+
+£¡£¡£¡£¡£¡£¡£¡£¡£¡WHY IN COMPUTER SCIENCE, YOUR GUYS DESIGNED DIRECTION UP TO BE Y+1 AND DOWN IS Y-1???????????????????????????
+thought I notice the data was loaded from the bottom of the map, which means the (0,0) crood is at the bottom left, it is extremely inlogic to set up to Y+1 and down to Y-1
+
+
+
+Class Actor
+
+	virtual void doSomething() = 0;//every actor to do something, because actor don't have to do something, it is pure virtual function
+	virtual ~Actor() {};//because lots of class is based on Actor, so destructor has to be virtual
+	int setHP(int value);//set Hit point
+	StudentWorld* getworld();//get the pointer to student world
+	int getHP() const;//get the value of Hit Point
+	int setSleep(int sleep);//set Actor to sleep
+	int getSleep() const;//get the value that how many ticks should be sleep
+	int ranDirection();//set a random direction
+	Actor* gettrapped();//determine which water pool trap actor
+	Actor*setTrapped(Actor*temp);//set which water pool trap actor
+	bool isDead()//determine whether or not the actor dead
+	bool eat()//Et food
+	virtual void setbite() {};//set bite for ant class, so it has to be virtual
+	virtual int getID() { return 0; }//get coloney number for ant, so it has to be virtual, becuase some class don't have colony number
+
+Class ants
+	virtual void doSomething();//do something
+	void move();//ant's move
+	int StringtoInt(string temp);//convert a string to Int
+	void Eeat();// ant's eat
+	void setbite() //ant being bite by other insect
+	void bite();//ant 's bite
+	void pickup();//pickup food food class
+	Compiler::Condition covertoCondition(string ope);//covert a string to enum condition
+	bool readIF(Compiler::Command cmd);//read if statement
+	void emit();//emit Pheromone
+	virtual int getID() {//get colony number
+
+class Pheromone
+	virtual void doSomething();//do something
+	virtual  int getID() {//get colony number
+
+class Pebble
+	virtual void doSomething();//Althought don't need to dosomething but in based class it is a pure virtual function
+
+class Food
+	virtual void doSomething();//Althought don't need to dosomething but in based class it is a pure virtual function
+
+class Anthill
+	virtual void doSomething();//dosomething
+
+class Baby_Grasshopper
+	void move();//move for bady_Grasshopper and adult_Grasshopper
+	virtual void doSomething();//dosomething
+
+class Adult_Grasshopper
+	virtual void doSomething();//doSomething
+	bool bite();//bite for Grasshopper
+	bool jump();//jump
+class Water
+	virtual void doSomething()//doSomething
+class StudentWorld
+	virtual int init();//init		virtual because it is come from it based class throught it don't need to, it can increase readibitily of code
+	virtual int move();//call all actor to move		virtual because it is come from it based class throught it don't need to, it can increase readibitily of code
+	virtual void cleanUp();//cleanup		virtual because it is come from it based class throught it don't need to, it can increase readibitily of code
+	bool addActor(Actor*p,char type);//add a actor to data struct
+	nlist findObj(char type);//find the linked list for certain obj
+	bool DoDo(char type);//do something for all subject
+	char getmap(int x, int y);//get the map for pebble etc
+	char getfmap(int x, int y);//get the food map
+	void setfmap(int x, int y);//set the food map
+	void setnoAnt(int index, int n) {//set the ant number
+		noAnt[index] = n;
+	}
+	bool hill2000(int index);//whether or not the hill has 2000 hit points
+	int getnoAnt(int index) {//get number of a certain colony of ant
+		return noAnt[index];
+	}
+	void del();//delete dead obj
+	void setFood(nlist temp);//set the food map
+//other part in student dont need to implent virtual, because it don't has derived class
+2
+I haven't implentment poision trggied to poision while object is moving
+I haven't impletment water pool trggied to trapped object while object is moving
+for those part, I think it is extrememly stupid to 
+
+3
+I am not sure the bite of my program
+the spec doesn't specify that;
+there is not precedence of insect to bite
+for example: In a linked list, there is a insect the first insect in (1,1) is at the first poisition of linked list
+ther is a another insect in (1, 3) is in the second position of the linked list
+If the insect in (1,1), it move from (1,1) to (1,3)
+when call the second insect to dosomething, should the second insect bite the first one?
+In my program I set the second insect going to bite the first one
+
+simialar with bite part
+should anthill eat food after the all object moved or it should eat after ant drop?
+In my program, if a ant drop in 1 round, my anthill going to eat it in the next round
+
+simialar with born ant part
+should birth come before than ant move or opposite?
+My program give birth of all ant then ant going to move
+
+simialar with baby grasshopper to adult grasshopper part
+after baby grasshoppper transfer to adult grasshopper should it move?
+my one wonldn't move 
+
+4
+for every class in the test case, I add breakpoint in every if statement to check whether or not the program going to go through this breakpoint.
+Because there are 2000 simulation go through this program, if I implentate it correctly, it defintely going to that breakpoint.
+
