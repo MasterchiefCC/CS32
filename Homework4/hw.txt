@@ -1,1 +1,32 @@
+2)
+For the arugement sc.insert(Complex(40,10)):
+In this function, 
+for (p = m_head->m_next, pos = 0; p != m_head  && value > p->m_value; p = p->m_next, pos++);
+This statement going to compare two template value. However, the complex class doesn't support the operator >.
+As a result, it going to cause a compilation error.
+For the arugement sc.insert(0, Complex(50,20)):
+In this function, it won't use operation which haven't implemented or value which haven't implemented.
+So it won't casue compilation error.
 
+3)b)
+Because when we access to submeau of mainmeau such as File/New, in recursion, I unable to accsee to upper meau's name.
+As a result, I have to use a varible to store the the name of upper meau to print the path.
+
+4)a)
+time complexity O(N^3)
+There are 3 layers loop, each of it contains next level loop.
+So the time complexity of first layer is O(N), the second is O(N*N), and the third is O(N*N*N); 
+
+4)b)
+time complexity O(N^3)
+There also are 3 layers loop, and also each of it contain next level loop.
+The first layer is O(N), the second is (N*(N-1)/2) in temr of big-O is O(N^2). So the third is O(N*N*N);
+
+5)a)
+time complexity O(N^2)
+The first layer is O(N), the second contain a get() and insert() which going the traversal this linked list, so the calculation of second is N*(N+N) in terms of big-O is O(N^2)
+
+5)b)
+time complexity O(N)
+It only going to traverse this two linked list. Unlike the function insert(), the function insertBefore() going to plug a value into linked list based on Node pointer not the position. So it don't need to traverse the hold linked list to find the position to plug in.
+So the time complexity is O(N)
