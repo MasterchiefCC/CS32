@@ -1,7 +1,7 @@
 #ifndef MYMAP_H
 #define  MYMAP_H
 // MyMap.h
-
+#include "provided.h"
 // Skeleton for the MyMap class template.  You must implement the first six
 // member functions.
 
@@ -19,7 +19,7 @@ public:
 	int size() const {
 		return m_size;
 	}
-	void associate(const KeyType& key, const ValueType& value) {
+	void associate(const KeyType& key, const ValueType &value) {
 		Node*temp = new Node(key, value);
 		if (root == nullptr) { root = temp; m_size++; return; }
 
@@ -50,12 +50,18 @@ public:
 
 	// for a modifiable map, return a pointer to modifiable ValueType
 	ValueType* find(const KeyType& key){
-		return const_cast<ValueType*>(const_cast<const MyMap*>(this)->find(key));
+		Node*p = root;
+		while (1) {
+			if (p == nullptr)return nullptr;
+			else if (key > p->m_name)p = p->m_right;
+			else if (key < p->m_name)p = p->m_left;
+			else if (key == p->m_name)return &p->m_value;
+		}
 	}
 
 	// C++11 syntax for preventing copying and assignment
-	MyMap(const MyMap&) = delete;
-	MyMap& operator=(const MyMap&) = delete;
+	//MyMap(const MyMap&) = delete;
+	//MyMap& operator=(const MyMap&) = delete;
 
 private:
 	struct Node{

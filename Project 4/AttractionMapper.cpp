@@ -1,7 +1,8 @@
 #include "provided.h"
+#include "MyMap.h"
 #include <string>
 using namespace std;
-
+typedef MyMap<string, GeoCoord> mmap;
 class AttractionMapperImpl
 {
 public:
@@ -9,6 +10,8 @@ public:
 	~AttractionMapperImpl();
 	void init(const MapLoader& ml);
 	bool getGeoCoord(string attraction, GeoCoord& gc) const;
+private:
+	mmap m_AttractionMap;
 };
 
 AttractionMapperImpl::AttractionMapperImpl()
@@ -19,13 +22,23 @@ AttractionMapperImpl::~AttractionMapperImpl()
 {
 }
 
-void AttractionMapperImpl::init(const MapLoader& ml)
-{
+void AttractionMapperImpl::init(const MapLoader& ml){
+	for (int a = 0; a < ml.getNumSegments(); a++) {
+		StreetSegment temp;
+		if (ml.getSegment(a, temp)) {
+			int len = temp.attractions.size();
+			for (int b = 0; b < len; b++)
+				m_AttractionMap.associate(temp.attractions[b].name, temp.attractions[b].geocoordinates);
+		}
+	}
 }
 
 bool AttractionMapperImpl::getGeoCoord(string attraction, GeoCoord& gc) const
 {
-	return false;  // This compiles, but may not be correct
+	const GeoCoord*temp = m_AttractionMap.find(attraction);
+	if (temp == nullptr)return false;
+	gc = *temp;
+	return true;
 }
 
 //******************** AttractionMapper functions *****************************
