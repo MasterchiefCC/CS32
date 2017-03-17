@@ -19,7 +19,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////
 
 	struct Node {//a Node to store points
-		Node() { parent = nullptr; streetname = ""; }
+		Node() :parent(nullptr), streetname("") {}
 		Node(Node*p, string name, GeoCoord c, double N, double G) :parent(p), streetname(name), coord(c), Ncost(N), Gcost(G) {
 			Fcost = Ncost + Gcost;
 		}

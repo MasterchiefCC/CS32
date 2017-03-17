@@ -31,11 +31,11 @@ bool MapLoaderImpl::load(string mapFile){
 	while (getline(fin, s)) {
 		StreetSegment temp;
 		//street name
-		for (int a = 0; a < s.size(); a++)temp.streetName += s[a];
+		for (unsigned int a = 0; a < s.size(); a++)temp.streetName += s[a];
 		//find the coordinate
 		getline(fin, s);
 		string SX, SY, EX, EY;
-		int a = 0;
+		unsigned int a = 0;
 		while (s[a] != ','&&a < s.size()) { SX += s[a]; a++; }
 		a+=2;
 		while (s[a] != ' '&&a < s.size()) { SY += s[a]; a++; }

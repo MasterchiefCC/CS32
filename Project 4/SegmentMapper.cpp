@@ -24,12 +24,12 @@ SegmentMapperImpl::SegmentMapperImpl(){
 }
 
 SegmentMapperImpl::~SegmentMapperImpl(){
-	for (int a = 0; a < m_Ymap.size(); a++)
+	for (unsigned int a = 0; a < m_Ymap.size(); a++)
 		delete m_Ymap[a];
 }
 
 void SegmentMapperImpl::init(const MapLoader& ml){
-	for (int a = 0; a < ml.getNumSegments(); a++) {//traverse all street segment
+	for (unsigned int a = 0; a < ml.getNumSegments(); a++) {//traverse all street segment
 		StreetSegment Stemp;
 		if (ml.getSegment(a, Stemp)) {//connect the starting point and ending point to data structure
 			connect(Stemp.segment.start.latitude, Stemp.segment.start.longitude, Stemp);

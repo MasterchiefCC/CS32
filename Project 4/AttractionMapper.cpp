@@ -24,12 +24,12 @@ AttractionMapperImpl::~AttractionMapperImpl()
 }
 
 void AttractionMapperImpl::init(const MapLoader& ml){
-	for (int a = 0; a < ml.getNumSegments(); a++) {
+	for (unsigned int a = 0; a < ml.getNumSegments(); a++) {
 		StreetSegment temp;//get each segments
 		if (ml.getSegment(a, temp)) {
 			int len = temp.attractions.size();
-			for (int b = 0; b < len; b++) {//traverse every attraction on that street segment
-				for (int c = 0; c < temp.attractions[b].name.size(); c++)
+			for (unsigned int b = 0; b < len; b++) {//traverse every attraction on that street segment
+				for (unsigned int c = 0; c < temp.attractions[b].name.size(); c++)
 					temp.attractions[b].name[c] = tolower(temp.attractions[b].name[c]);//change to lower case
 				m_AttractionMap.associate(temp.attractions[b].name, temp.attractions[b].geocoordinates);//connect key value and strored value
 			}
@@ -39,7 +39,7 @@ void AttractionMapperImpl::init(const MapLoader& ml){
 
 bool AttractionMapperImpl::getGeoCoord(string attraction, GeoCoord& gc) const
 {
-	for (int a = 0; a < attraction.size(); a++)
+	for (unsigned int a = 0; a < attraction.size(); a++)
 		attraction[a] = tolower(attraction[a]);//change to lower case
 	const GeoCoord*temp = m_AttractionMap.find(attraction);//find my data structure
 	if (temp == nullptr)return false;//can't find it
