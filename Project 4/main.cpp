@@ -84,10 +84,10 @@ using namespace std;
 // method.  Since it's useful in more than one .cpp file, its declaration
 // should go in support.h and its implementation in support.cpp.
 
-template<typename T>
-string directionOfLine(const T&)
+
+string directionOfLine(NavSegment N)
 {
-	return "IN_SOME_DIRECTION";
+	return N.m_direction;
 }
 // END OF WHAT YOU CAN REMOVE ONCE YOU'VE IMPLEMENTED string directionOfLine(const GeoSegment& gs)
 
@@ -205,7 +205,7 @@ void printDirections(string start, string end, vector<NavSegment>& navSegments)
 			if (distSinceLastTurn > 0)
 			{
 				cout << "Proceed " << distSinceLastTurn << " miles "
-				     << directionOfLine(effectiveSegment) << " on " << thisStreet << endl;
+				     << directionOfLine(ns) << " on " << thisStreet << endl;
 				thisStreet.clear();
 				distSinceLastTurn = 0;
 			}
@@ -216,7 +216,7 @@ void printDirections(string start, string end, vector<NavSegment>& navSegments)
 
 	if (distSinceLastTurn > 0)
 		cout << "Proceed " << distSinceLastTurn << " miles "
-		     << directionOfLine(effectiveSegment) << " on " << thisStreet << endl;
+		     << directionOfLine(navSegments[navSegments.size()-1]) << " on " << thisStreet << endl;
 	cout << "You have reached your destination: " << end << endl;
 	cout.precision(1);
 	cout << "Total travel distance: " << totalDistance << " miles" << endl;

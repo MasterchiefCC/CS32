@@ -3,11 +3,11 @@
 
 #include <string>
 #include <vector>
-
+#include <iostream>
 struct GeoCoord
 {
 	GeoCoord(std::string lat, std::string lon)
-     : latitudeText(lat), longitudeText(lon), latitude(stod(lat)), longitude(stod(lon))
+		: latitudeText(lat), longitudeText(lon), latitude(stod(lat)), longitude(stod(lon))
 	{}
 
 	GeoCoord()

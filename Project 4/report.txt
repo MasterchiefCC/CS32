@@ -1,0 +1,18 @@
+MyMap:
+associate(): N is the item number
+O(logN)
+find(): N is the item number
+O(logN)
+AttractionMapper: 
+init(): N total street segments in the input mapping data, and A total attractions
+O(N+A*log(A))
+getGeoCoord():
+O(log(A))
+SegmentMapper: 
+because I didn't overload the operator, In my SegmentMapper, there are a map contain X croodinate coresponsing the index for the vector which contain the Y coordinates which have same X coordinate.a vector which contain pointer to a map coresponsing to Y shared the same X coordinate the Y coordinate will coresponsing to a vector contain StreetSegment share the same coordinate.
+N is the total street segments
+init(): (NlogN)
+N reprent the total different X coordinate, Y is the the number of S coordinate coreponse to a particle X
+getSegments():(logN+logS)
+Navigator: push a new item to heap, find a coord cost logN^2, and traverse closed table and open table and to traverse all the points on map cost N^2
+navigate() :NlogN
